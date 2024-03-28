@@ -22,7 +22,7 @@ button {
 input {
   width: calc(272px - 16px);
   border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.3); /* Цвет и стиль границы */
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 input:hover {

@@ -35,4 +35,3 @@ export async function imageSearch(value) {
         return null;
       });
   }
-

@@ -8,15 +8,15 @@
   </head>
   <body>
     <section class="search">
-      <form id="searchForm">
+      <form id="search-form">
         <input type="text" id="search-input" placeholder="Search images..." />
         <button type="submit" id="search-btn">Search</button>
       </form>
     </section>
-    <section class="images"></section>
-
-    <script type="module" src="./js/pixabay-api.js"></script>
-    <script src="./js/render-functions.js"></script>
+    <div class="progress-loader">
+      <div class="progress"></div>
+    </div>
+    <ul class="gallery"></ul>
     <script type="module" src="./main.js"></script>
   </body>
 </html>
