@@ -15,8 +15,7 @@ searchForm.addEventListener('submit', event => {
     const query = event.target.querySelector('#search-input').value.trim();
 
     if (query) {
-        // Показываем лоадер перед началом поиска
-        loader.classList.add('loading'); // Добавляем класс "loading", чтобы лоадер начал крутиться
+        loader.classList.add('loading');
 
         imageSearch(query)
           .then(data => {
@@ -35,9 +34,8 @@ searchForm.addEventListener('submit', event => {
             console.error(error);
           })
           .finally(() => {
-            // Скрываем лоадер после завершения всех операций (независимо от результата)
-            loader.classList.remove('loading'); // Убираем класс "loading", чтобы лоадер перестал крутиться
+            loader.classList.remove('loading');
           });
     } 
     event.target.reset();
-})
+});

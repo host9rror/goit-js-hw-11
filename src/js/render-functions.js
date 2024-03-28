@@ -1,13 +1,5 @@
-// render-functions.js
 import SimpleLightbox from "simplelightbox";
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
-import { imageSearch } from "./pixabay-api";
-
-const lightbox = new SimpleLightbox('.gallery-link', {
-  captionsData: 'alt',
-  captionDelay: 250
-});
 
 export function renderImages(data, galleryImages) {
   if (!Array.isArray(data)) {
@@ -18,7 +10,7 @@ export function renderImages(data, galleryImages) {
   const galleryMarkup = data
     .map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
       return `<li class="gallery-item">
-        <a class="gallery-link" href="${largeImageURL}">
+        <a href="${largeImageURL}">
           <img
             src="${webformatURL}"
             data-source="${largeImageURL}"
@@ -37,6 +29,10 @@ export function renderImages(data, galleryImages) {
 
   if (galleryImages) { 
     galleryImages.innerHTML = galleryMarkup;
+    const lightbox = new SimpleLightbox('.gallery-item a', {
+      captionsData: 'alt',
+      captionDelay: 250
+    });
   } else {
     console.error(Error);
   }
