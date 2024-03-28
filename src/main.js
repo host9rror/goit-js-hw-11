@@ -6,8 +6,7 @@ import { renderImages } from "./js/render-functions";
 
 const searchForm = document.querySelector('#search-form');
 const galleryImages = document.querySelector('.gallery');
-const loadMove = document.querySelector('.progress');
-loadMove.style.display = 'none';
+const loader = document.querySelector('.loader');
 
 searchForm.addEventListener('submit', event => {
     event.preventDefault();
@@ -16,28 +15,29 @@ searchForm.addEventListener('submit', event => {
     const query = event.target.querySelector('#search-input').value.trim();
 
     if (query) {
-        loadMove.style.display = 'flex';
+        // Показываем лоадер перед началом поиска
+        loader.classList.add('loading'); // Добавляем класс "loading", чтобы лоадер начал крутиться
 
         imageSearch(query)
           .then(data => {
-            if (data && data.hits && data.hits.length === 0) {
+            if (data === null) {
                 iziToast.error({
+                  position: "topRight",
                   title: '❌',
                   icon: '',
-                  message: `Sorry, there are no images matching your search query. Please, try again!`,
+                  message: "Sorry, there are no images matching your search query. Please try again!",
                 });
-              } else {
-                renderImages(data.hits);
-              }
-              loadMove.style.display = 'none';
+            } else {
+                renderImages(data.hits, galleryImages);
+            }
           })
           .catch(error => {
             console.error(error);
-            loadMove.style.display = 'none';
+          })
+          .finally(() => {
+            // Скрываем лоадер после завершения всех операций (независимо от результата)
+            loader.classList.remove('loading'); // Убираем класс "loading", чтобы лоадер перестал крутиться
           });
     } 
     event.target.reset();
 })
-
-
-
